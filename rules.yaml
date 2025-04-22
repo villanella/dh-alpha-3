@@ -1,0 +1,25 @@
+rules:
+  validators:
+    dochub.welcome:
+      title: нет главной страницы
+      
+    dochub.experts:                                   # Валидатор контролирует заполнение поля expert для компонентов L1
+      title: Не указаны эксперты для компонентов      # Название валидатора
+      source: >                                       # Источник данных об ошибках. В данном случае JSONata запрос
+        ([([
+          components.$spread().(                                                /* Сканируем все компоненты */
+            $ID := $keys()[0];
+              {                                                                 /* Генерируем массив признаков проблем */
+                "isComponent": *.entity = "component",                          /* Это компонент */
+                "isDocHubL1Domain": $boolean($match($ID, /dochub\.[^\.]*$/)),   /* в домене DocHub L1 */
+                "isExpertEmpty":  $not($boolean("" & *.expert)),                /* и поле expert не заполнено */
+                "id": $ID
+              }
+          )        
+        ][isDocHubL1Domain and isExpertEmpty and isComponent]).{ /* Отбираем все компоненты где поле 'expert' пустое*/
+            "uid": "expert-component-" & id,                                    /* Уникальный идентификатор выявленной ошибки */
+            "location": "@component/" & id,                          /* Ссылка на расположение объекта ошибки */
+            "correction": "Укажите эксперта по компоненту",                     /* Рекомендации как исправить проблему */
+            "description": "Компоненты L1 должены иметь сведения об экспертах."
+        }])
+
