@@ -4,3 +4,13 @@ docs:
     source: docs/dochub_welcome2.md
     location: /Документы/dochub.welcome
     title: Home Page
+  openapi:
+    type: openapi
+    source: docs/auto-1745428280957-2771.yaml
+    location: /Документы/OpenAPI
+    title: OpenAPI
+  bpmn:
+    type: bpmnjs
+    source: docs/auto-1745428324422-9077.bpmn
+    location: /Документы/BPMN
+    title: BPMN

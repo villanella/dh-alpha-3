@@ -1,0 +1,5 @@
+components:
+  test:
+    title: Test component
+    entity: system
+    description: Test component

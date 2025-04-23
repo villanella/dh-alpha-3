@@ -10,6 +10,7 @@ imports:
   - https://alpha.dochub.info/archcode/_metamodel_/ceaf-app/dochub.yaml
   - rules.yaml
   - docs.yaml
+  - components/components.yaml
 
 $repo: 
   generation: 

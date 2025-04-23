@@ -18,3 +18,55 @@ rules:
             }]; 
         )
 
+    systems_check: 
+      title: "Systems check"
+      description: "Проверка наличия систем"
+      source: >
+        (
+           $manifest := $;
+           $systems := $manifest.components.$sift(function($v) { $v.entity="system" });
+           [$not([$systems]) ? {
+              "uid": "$dh-mm-nfs",
+              "title": "Нет ни одной системы",
+              "description": "Не найдено ни одной описанной информационной системы",
+              "correction": "Опишите свои системы в соответствии с инструкцией",
+              "location": "@component",
+              "path": "/components"  
+            }];
+        )
+
+    swagger_check: 
+      title: "Swagger check"
+      description: "Проверка наличия контрактов swagger"
+      source: >
+        (
+            $manifest := $;	
+            $value := "openapi"; 	
+            [$not([docs.$filter($.*, function($v, $i, $a) {$contains($v."type", $value)}).($)]) ? {
+               "uid": "$dh-mm-nfapi",
+               "title": "Нет ни одного контракта swagger",
+               "description": "Не найдено ни одного описанного контракта swagger",
+               "correction": "Опишите свои контракты swagger в соответствии с инструкцией",
+               "location": "@document",
+               "path": "/docs"  
+            }];        
+        )
+
+    bpmn_check: 
+      title: "BPMN check"
+      description: "Проверка наличия описания бизнес-процессов"
+      source: >
+        (            
+            /*debugger;*/
+            $manifest := $;	
+            $value := "bpmnjs"; 	
+            [$not([docs.$filter($.*, function($v, $i, $a) {$contains($v."type", $value)}).($)]) ? {
+               "uid": "$dh-mm-nfbp",
+               "title": "Нет ни одного описанного БП",
+               "description": "Не найдено ни одного описанного бизнес-процесса",
+               "correction": "Опишите свои бизнес-процессы в соответствии с инструкцией",
+               "location": "@document",
+               "path": "/docs"  
+            }];
+        )
+
