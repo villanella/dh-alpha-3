@@ -1,6 +1,6 @@
 docs:
   dochub.welcome:
     type: markdown
-    source: docs/dochub_welcome.md
+    source: docs/dochub_welcome2.md
     location: /Документы/dochub.welcome
     title: Home Page
