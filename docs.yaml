@@ -1,6 +1,6 @@
 docs:
-  dochub.welcome
+  dochub.welcome:
     type: markdown
-    source: docs/dochub.welcome.md
-    location: /Документы/Новый документ 1745257474753
-    title: Новый документ 1745257474753
+    source: docs/dochub_welcome.md
+    location: /Документы/dochub.welcome
+    title: Home Page
